@@ -1,0 +1,39 @@
+<div id="wrapper">
+    <div id="page-content-wrapper">
+    	<div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12" id="contact-page">
+                    <h3>Contact List</h3>
+                    <hr>
+                   <!-- <button type="button" class="btn pull-right" style="margin-right:9%;">Add Contact</button> -->
+                </div>
+            </div>
+        </div>
+        <div class="container-wrapper col-md-10 bg-form">
+			<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+			  	<thead>
+			    	<tr>
+			    		<th>Action</th>
+				    	<th>#</th>
+				    	<th>Name</th>
+				      	<th>Email Address</th>
+				      	<th>Contact No</th>
+				    </tr>
+			  	</thead>
+			  	<tbody>
+				    <tr *ngFor="let user of users; let i = index;">
+				    	<td><input type="hidden" value={{user.id}}><a style="cursor:pointer;" (click)="gotoEdit(user)">Edit</a></td>
+				    	<td>{{i+1}}</td>
+				      	<td>{{user.firstName}} {{user.lastName}}</td>
+				      	<td>
+				      		<p *ngFor="let email of user.emails"><span>{{email.emailType}}:</span> {{email.emailId}}</p>
+				      	</td>
+				      	<td >
+				      		<p *ngFor="let phone of user.phones"><span>{{phone.phoneType}}:</span> {{phone.phoneNumber}}</p>
+				      	</td>
+				    </tr>
+				</tbody>
+			</table>
+        </div>
+    </div>
+</div>

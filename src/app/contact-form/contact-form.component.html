@@ -1,0 +1,88 @@
+<div id="wrapper">
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12" id="contact-page">
+                    <h3>Contact Form</h3>
+                    <hr>
+                   <button type="button" class="btn pull-right" style="margin-right:9%;">Add Contact</button>
+                </div>
+            </div>
+        </div>
+        <div class="container-wrapper col-md-10 bg-form">
+            <form class="form-horizontal col-md-10 mar-left" id="contactForm" [formGroup]="contactForm">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="fname">First Name:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="first-Name" formControlName="firstName" [(ngModel)]="user.firstName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="lname">Last Name:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="lname" placeholder="Enter Last Name" name="last-name" formControlName="lastName" [(ngModel)]="user.lastName">
+                    </div>
+                </div>
+                <div formArrayName="items" *ngFor="let item of contactForm.get('items').controls; let i = index;">
+                    <div [formGroupName]="i">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="pwd">Email:</label>
+                            <div class="col-sm-6">
+                                <span class="glyphicon glyphicon-plus-sign pull-right pointer" (click)="addEmailAttribute()"></span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="bottom-border">
+                            
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">
+                                <select formControlName="emailType" class="selectEmail" (change)="selectEmailType($event.target.value)" >
+                                <option *ngFor="let type of types" [value]="type">{{type}}</option>
+                                </select>
+                            </label>
+                            <div class="col-sm-5">
+                                <input type="email" class="form-control emailClass" [attr.id]="'emailId_' + i" placeholder="Enter Email Address" name="email" formControlName="emailId" >
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="glyphicon glyphicon-minus-sign pull-right pointer" (click)="removeEmailAttribute()"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-border"></div>
+                <div formArrayName="phones" *ngFor="let item of contactForm.get('phones').controls; let i = index;">
+                    <div [formGroupName]="i">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="pwd">Phone No:</label>
+                            <div class="col-sm-6">
+                                <span class="glyphicon glyphicon-plus-sign pull-right pointer" (click)="addPhoneAttribute()"></span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="bottom-border"></div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">
+                                <select formControlName="phoneType" class ="selectPhone" (change)="selectPhoneType($event.target.value)" >
+                                <option *ngFor="let type of types" [value]="type">{{type}}</option>
+                                </select>
+                            </label>
+                            <div class="col-sm-5">
+                                <input type="number" class="form-control phoneClass" [attr.id]="'phoneNumber_' + i" placeholder="Enter Contact No" name="phnnum" formControlName="phoneNumber" >
+                            </div>
+                            <div class="col-sm-1">
+                                <span class="glyphicon glyphicon-minus-sign pull-right pointer" (click)="removePhoneAttribute()"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="bottom-border"></div>
+                <div class="bt-align">
+                    <button type="button" class="btn btn-primary" (click)="save(user)">Save</button>
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
